@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 });
 
 // API route to send received messages
-app.get("/messages", (req, res) => {
+app.get("/api/messages", (req, res) => {
   res.json(receivedMessages);
 });
 
