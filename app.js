@@ -18,7 +18,11 @@ const bot = new Telegraf(BOT_TOKEN, {
   },
 });
 
-// bot.use(Telegraf.log());
+// This will log all an object containing more detailed information when each message is received
+// send a test message once you have added the bot to a chat
+// You can find the chat ID in the attribute chat.id - use this in the
+// This line can be commented out afterwards
+bot.use(Telegraf.log());
 
 // List to store received messages
 const receivedMessages = [];
