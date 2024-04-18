@@ -7,21 +7,25 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-// Initialize Telegraf bot
-const bot = new Telegraf(BOT_TOKEN);
+// Initialize Telegraf bot with long polling
+const bot = new Telegraf(BOT_TOKEN, {
+  telegram: {
+    webhookReply: false,
+  },
+});
+
+// bot.use(Telegraf.log());
 
 // List to store received messages
 const receivedMessages = [];
 
-// Middleware to use Telegraf with Express
-app.use(bot.webhookCallback("/bot"));
-
 // Bot command handlers
-bot.start((ctx) => ctx.reply("Howdy, how are you doing?"));
+bot.start((ctx) => ctx.reply("Hello, Welcome to the chat-bot test group!"));
 bot.help((ctx) => ctx.reply("I'm a simple echo bot."));
 
 // Bot message handler
-bot.on("message", (ctx) => {
+// Listen for any text message using a regular expression matching anything
+bot.hears(/.*/, (ctx) => {
   receivedMessages.push(ctx.message.text);
   console.log(
     "Message Received-------->",
@@ -29,8 +33,12 @@ bot.on("message", (ctx) => {
   );
 });
 
-// Launch the bot
-bot.launch();
+// Start the bot with long polling
+bot.launch({
+  polling: {
+    timeout: 3000, // Adjust polling timeout as needed
+  },
+});
 
 // Express route to serve HTML file
 app.get("/", (req, res) => {
