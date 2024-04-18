@@ -20,7 +20,7 @@
 
     <script>
       function fetchMessages() {
-        fetch("/messages")
+        fetch("/api/messages")
           .then((response) => response.json())
           .then((messages) => {
             const chatbox = document.getElementById("chatbox");
@@ -35,8 +35,8 @@
       // Fetch messages initially
       fetchMessages();
 
-      // Fetch messages every 2 seconds
-      setInterval(fetchMessages, 2000);
+      // Fetch messages every half second
+      setInterval(fetchMessages, 500);
     </script>
   </body>
 </html>
