@@ -1,11 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const { Telegraf } = require("telegraf");
+const bodyParser = require("body-parser");
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+app.use(bodyParser.json());
 
 // Initialize Telegraf bot with long polling
 const bot = new Telegraf(BOT_TOKEN, {
@@ -28,7 +31,7 @@ bot.help((ctx) => ctx.reply("I'm a simple echo bot."));
 bot.hears(/.*/, (ctx) => {
   receivedMessages.push(ctx.message.text);
   console.log(
-    "Message Received-------->",
+    "Message Received from Telegram-------->",
     receivedMessages[receivedMessages.length - 1]
   );
 });
@@ -48,6 +51,15 @@ app.get("/", (req, res) => {
 // API route to send received messages
 app.get("/api/messages", (req, res) => {
   res.json(receivedMessages);
+});
+
+// Route to handle messages sent from the client
+app.post("/api/messages-sent", (req, res) => {
+  const message = req.body.message;
+  receivedMessages.push(message);
+  // Here you can process the message as needed, e.g., save it to a database
+  console.log('"Message Received from Front end-------->"', message);
+  res.sendStatus(200); // Send a success response
 });
 
 // Start the Express server
