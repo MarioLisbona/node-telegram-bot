@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telegram Chat</title>
+    <style>
+      #chatbox {
+        width: 400px;
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chatbox"></div>
+
+    <script>
+      function fetchMessages() {
+        fetch("/messages")
+          .then((response) => response.json())
+          .then((messages) => {
+            const chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML = messages
+              .map((message) => `<div>${message}</div>`)
+              .join("");
+            chatbox.scrollTop = chatbox.scrollHeight;
+          })
+          .catch((error) => console.error("Error fetching messages:", error));
+      }
+
+      // Fetch messages initially
+      fetchMessages();
+
+      // Fetch messages every 2 seconds
+      setInterval(fetchMessages, 2000);
+    </script>
+  </body>
+</html>
