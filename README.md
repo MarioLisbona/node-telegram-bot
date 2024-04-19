@@ -65,6 +65,7 @@ The front end will load at [http://localhost:3000](http://localhost:3000)
 - This has to be done manually at the moment...trying to make this work programatically...
 - send a message from group chat in the telegram app
 - It will appear in the console along with a returnen object.
+- You can now comment out `bot.use(Telegraf.log());` in `app.js`. The logging is no longer needed.
 - The chat ID will be in the attribute `chat.id` save this to the `CHAT_ID` key-pair in the `.env` file
 - restart the server
 
