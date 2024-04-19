@@ -40,6 +40,7 @@ cd node-telegram-bot
 2. Open the chat and click the 3 dots in the top right corner and select `info`
 3. Find the bot in the members list and click it
 4. Click `Add to Group or Channel` and select the chat you want to use
+5. Add the bot as Administrator
 
 ### Install dependencies
 
