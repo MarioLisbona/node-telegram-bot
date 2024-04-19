@@ -2,9 +2,21 @@
 
 ## Setup instructions
 
+### Create a local clone of this repo
+
+```bash
+git clone git@github.com:MarioLisbona/node-telegram-bot.git
+```
+
 ### Create environment variables
 
-1. Change the filename `.env.sample` to `.env`
+1. cd into the directory
+
+```bash
+cd node-telegram-bot
+```
+
+2. Change the filename `.env.sample` to `.env`
 
 ### Create a new Telegram Bot
 
